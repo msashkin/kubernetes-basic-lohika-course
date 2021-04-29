@@ -1,0 +1,33 @@
+# secrets are created by executing:
+# kubectl create secret generic my-creds --from-literal='username=msashkin' --from-literal='password=P@ssw0rd'
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: echo-server-pod
+  labels:
+    app: echo-server-pod
+spec:
+  containers:
+    - name: echo-server
+      image: ealen/echo-server:latest
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 80
+      env:
+        - name: PORT
+          value: "80"
+        - name: SECRET_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: my-creds
+              key: username
+        - name: SECRET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: my-creds
+              key: password
+  restartPolicy: OnFailure
