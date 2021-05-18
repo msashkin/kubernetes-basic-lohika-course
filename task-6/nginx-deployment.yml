@@ -1,0 +1,32 @@
+# Pods access storage by using the claim as a volume.
+# Claims must exist in the same namespace as the Pod using the claim.
+# The cluster finds the claim in the Pod's namespace and uses it to get the PersistentVolume backing the claim.
+# The volume is then mounted to the host and into the Pod.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: "/var/www/html"
+              name: persistent-volume
+      volumes:
+        - name: persistent-volume
+          persistentVolumeClaim:
+            claimName: persistent-volume-claim

@@ -1,0 +1,21 @@
+# A PersistentVolumeClaim (PVC) is a request for storage by a user.
+# It is similar to a Pod. Pods consume node resources and PVCs consume PV resources.
+# Pods can request specific levels of resources (CPU and Memory).
+# Claims can request specific size and access modes (e.g., they can be mounted ReadWriteOnce, ReadOnlyMany or ReadWriteMany, see AccessModes).
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: persistent-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: gp2
+  # selector:
+  #   matchLabels:
+  #     release: "stable"
+  #   matchExpressions:
+  #     - { key: environment, operator: In, values: [dev] }
