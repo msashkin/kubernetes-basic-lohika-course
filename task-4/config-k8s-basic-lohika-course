@@ -1,0 +1,30 @@
+# User: msaschin
+# Namespace: b1-msaschin
+
+# Use this config, exporting env to the current shell session:
+# export KUBECONFIG=~/.kube/config-k8s-basic-lohika-course
+
+# Add this config to the existing KUBECONFIG, exporting env to the current shell session:
+# export KUBECONFIG=$KUBECONFIG:~/.kube/config-k8s-basic-lohika-course
+
+# Display pods in the current-context k8s-basic-lohika-course-context (namespace 'b1-msaschin' and user 'msaschin' are predefined there):
+# kubectl get pods
+
+apiVersion: v1
+kind: Config
+users:
+  - name: msaschin
+    user:
+      token: <TOKEN>
+clusters:
+  - cluster:
+      certificate-authority-data: <CERTIFICATE_AUTHORITY_DATA>
+      server: <SERVER>
+    name: k8s-basic-lohika-course-cluster
+contexts:
+  - context:
+      cluster: k8s-basic-lohika-course-cluster
+      user: msaschin
+      namespace: b1-msaschin
+    name: k8s-basic-lohika-course-context
+current-context: k8s-basic-lohika-course-context
