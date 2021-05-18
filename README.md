@@ -13,3 +13,15 @@ Create a configmap imperatively:
 ```sh
 kubectl create configmap my-configmap-v1 --from-file=configmaps/v1/
 ```
+
+Apply all resources from folder:
+
+```sh
+kubectl apply -f ./
+```
+
+Delete all resources from folder:
+
+```sh
+kubectl delete -f ./
+```
