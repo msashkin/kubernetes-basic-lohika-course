@@ -1,0 +1,15 @@
+# Now whenever a Container is created in the namespace, Kubernetes performs these steps:
+# - If the Container does not specify its own CPU request and limit, assign the default CPU request and limit to the Container.
+# - Verify that the Container specifies a CPU request that is greater than or equal to min millicpu.
+# - Verify that the Container specifies a CPU limit that is less than or equal to max millicpu.
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: cpu-min-max-limit-range
+spec:
+  limits:
+    - max:
+        cpu: "200m"
+      min:
+        cpu: "100m"
+      type: Container
