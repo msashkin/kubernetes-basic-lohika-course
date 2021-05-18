@@ -1,0 +1,17 @@
+# Provides constraints that limit aggregate resource consumption per namespace.
+# It can limit the quantity of objects that can be created in a namespace by type, as well as the total amount of compute resources that may be consumed by resources in that namespace.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: resource-quota
+spec:
+  hard:
+    # requests.cpu: "1"
+    # requests.memory: 1Gi
+    limits.cpu: "2"
+    limits.memory: 5Gi
+    # requests.nvidia.com/gpu: 4
+    count/deployments.apps: "2"
+    count/replicasets.apps: "4"
+    count/pods: "3"
+    count/secrets: "4"
