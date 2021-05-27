@@ -1,0 +1,45 @@
+# Troubleshooting:
+
+# look at Dockerfile EXPOSE ports at DockerHub
+
+# selector should match with labels
+# kubectl get pods --show-labels
+# kubectl get svc -o wide
+
+# Check that endpoints exist
+# kubectl get endpoints
+
+# Port forward to localhost
+# kubectl port-forward pods/apache-86844c78f6-rxdb8 8080:80
+# kubectl port-forward svc/apache 8080:80
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache
+  labels:
+    app: apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+        - image: public.ecr.aws/lts/apache2:latest
+          imagePullPolicy: IfNotPresent
+          name: apache
+          # The actual fix
+          # ports:
+          #   - containerPort: 80
+          env:
+            - name: TZ
+              value: UTC
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
