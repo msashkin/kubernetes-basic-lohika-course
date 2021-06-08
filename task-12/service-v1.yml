@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-v1
+spec:
+  # Exposes the Service on each Node's IP at a static port (the NodePort). A ClusterIP Service, to which the NodePort Service routes, is automatically created.
+  # You'll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+  # For localhost is localhost:<external_port>
+  # type: NodePort
+  selector:
+    app: nginx-deployment
+    version: v1
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP

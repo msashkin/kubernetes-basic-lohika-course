@@ -1,0 +1,13 @@
+# Dry run of deploy:
+# helm install app-ver1 ./ --dry-run --debug
+
+# Deploy helm chart:
+# helm install app-ver1 ./
+
+# Deploy helm chart overriding values from this file
+# helm install app-ver2 ./ --set version=v2
+
+# Uninstall helm chart:
+# helm uninstall app-ver1 app-ver2
+
+version: v2

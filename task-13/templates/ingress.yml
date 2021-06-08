@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "nginx-ingress-{{ .Values.version }}"
+  annotations:
+    # use the shared ingress-nginx
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: "/msaschin/nginx/{{ .Values.version }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: "nginx-service-{{ .Values.version }}"
+                port:
+                  number: 80
