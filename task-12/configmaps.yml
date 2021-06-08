@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-v1
+data:
+  index.html: |-
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <h1>test page v1</h1>
+        <p>HTML file v1</p>
+      </body>
+    </html>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-v2
+data:
+  index.html: |-
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <h1>test page v2</h1>
+        <p>HTML file v2</p>
+      </body>
+    </html>
